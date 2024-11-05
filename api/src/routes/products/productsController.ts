@@ -9,7 +9,8 @@ export function listProducts (req:Request , res :Response){
   }
 
   export function createProduct (req:Request , res :Response){
-    res.send('yeni urun olustur')
+    console.log(req.body);
+    res.send('yeni urun olustur');
   }
 
   export function updateProduct (req:Request , res :Response){

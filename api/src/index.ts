@@ -11,7 +11,6 @@ app.use(json());
 app.get('/', (req, res) => {
     res.send('hello world 123')
 });
-//products endpoints
 
 app.use('/products', productRoutes);
 app.listen(port , ()=>{

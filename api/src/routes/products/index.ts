@@ -1,17 +1,12 @@
 import { Router } from "express";
+import { listProducts ,getProductById ,updateProduct , createProduct , deleteProduct} from "./productsController";
 
 const router= Router();
-router.get('/' , (req , res)=>{
-  res.send('Urun listesi')
-});
 
-router.get('/:id' , (req , res)=>{
-  console.log(req.params);
-  res.send('Urunlerden biri');
-});
-
-router.post('/', (req, res)=>{
-  res.send('Yeni Urun Olusturuldu')
-})
+router.get('/' , listProducts);
+router.get('/:id' ,getProductById);
+router.post('/', createProduct);
+router.put('/:id' , updateProduct);
+router.delete('/:id' , deleteProduct);
 
 export default router;

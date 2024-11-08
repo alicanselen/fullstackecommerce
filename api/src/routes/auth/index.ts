@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { createUserSchema, loginSchema, usersTable } from "../../db/usersSchema";
-import { validateData } from "../../middlewares/validatinMiddleware";
+import { createUserSchema, loginSchema, usersTable } from "../../db/usersSchema.js";
+import { validateData } from "../../middlewares/validatinMiddleware.js";
 import bcrypt from 'bcryptjs'
-import { db } from "../../db/index";
+import { db } from "../../db/index.js";
 import { eq } from "drizzle-orm";
 import jwt from 'jsonwebtoken'
 
@@ -59,7 +59,7 @@ router.post('/login' ,validateData(loginSchema) , async (req,res) =>{
         //@ts-ignore
         delete user.pasword;
         res.status(200).json({token , user});
-        console.log(email , pasword);
+        
 
     }catch(e){
         res.status(500).send('Bir seyler ters gitti !!!')

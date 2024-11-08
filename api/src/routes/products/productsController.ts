@@ -32,6 +32,8 @@ export async function listProducts (req:Request , res :Response){
 
     try {
 
+      console.log(req.userId)
+
       const [product]=await db
       .insert(productsTable)
       .values(req.cleanBody)

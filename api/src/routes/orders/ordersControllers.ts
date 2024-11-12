@@ -7,7 +7,7 @@ import { eq } from "drizzle-orm";
 export async function createOrder(req:Request , res:Response) {
     try{
         const {order , items}=req.cleanBody;
-        const userId = Number(req.userId);
+        const userId = req.userId;
 
         if(!userId)
             {
@@ -16,7 +16,11 @@ export async function createOrder(req:Request , res:Response) {
 
 
 
-        const [newOrder] = await db.insert(ordersTable).values({userId:userId}).returning();
+        const [newOrder] = await db
+        .insert(ordersTable)
+        //@ts-ignore
+        .values({userId:userId})
+        .returning();
 
         const orderItems = items.map((item: any) => ({
             ...item,

@@ -42,3 +42,6 @@ export const ordersTable = pgTable('orders', {
     order: insertOrderSchema,
     items: z.array(insertOrderItemSchema),
   });
+  export const updateOrderSchema = createInsertSchema(ordersTable).pick({
+    status: true,
+  });

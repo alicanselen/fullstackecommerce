@@ -5,8 +5,12 @@ import { Button, ButtonText } from "@/components/ui/button";
 
 export default function HomeScreen(){
     return (
-        <Button variant="outline">
-            <ButtonText>Basiniz Lutfen</ButtonText>
-        </Button>
+        <FlatList
+        data={products}
+        numColumns={2}
+        contentContainerClassName="gap-2"
+        columnWrapperClassName="gap-2"
+        renderItem={({item})=><ProductListItem product={item}/>}
+        />
     )
 }

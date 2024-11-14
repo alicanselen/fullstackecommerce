@@ -1,5 +1,5 @@
 
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import products from  '@/assets/products.json'
 import { Card } from "@/components/ui/card";
 // UI bileşeni olan Card'ı import ediyoruz
@@ -28,6 +28,7 @@ export default function ProductDetailsScreen(){
         }
     return(
         <Card className="p-5 rounded-lg max-w-[560px] flex-1">
+            <Stack.Screen  options={{title:product.name}}/>
                     {/* Ürünün resmini gösteriyoruz, resmin boyutu ve yuvarlak köşe ayarı var */}
                     <Image
                         source={{

@@ -21,7 +21,7 @@ export default function ProductListItem({ product }) {
             {/* Pressable bileşeni, kullanıcı etkileşimini algılar, dokunulabilir alan yaratır */}
             <Pressable className="flex-1">
                 {/* Card bileşeni, ürün öğesini görsel ve bilgilerle sarmalar */}
-                <Card className="p-5 rounded-lg max-w-[360px] flex-1">
+                <Card className="p-5 rounded-lg flex-1">
                     {/* Ürünün resmini gösteriyoruz, resmin boyutu ve yuvarlak köşe ayarı var */}
                     <Image
                         source={{

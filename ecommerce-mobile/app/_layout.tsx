@@ -6,11 +6,13 @@ import { Icon } from "@/components/ui/icon";
 import { ShoppingCart, User } from "lucide-react-native";
 import { Pressable , Text} from "react-native";
 import { useCart } from "@/store/cartStore";
+import { useAuth } from "@/store/authStore";
 
 const queryClient = new QueryClient();
 
 export default function RootLayout(){
     const cartItemsNum = useCart((state)=>state.items.length);
+    const isLoggedIn = useAuth((s)=>!!s.token);
     return (
         <QueryClientProvider client={queryClient}>
         <GluestackUIProvider>
@@ -25,7 +27,8 @@ export default function RootLayout(){
                     </Link>
                 ),
 
-                headerLeft:  ()=> (
+                headerLeft:  ()=> 
+                    !isLoggedIn && (
                     <Link href={'/login'} asChild>
                         <Pressable className="flex-row gap-2">
                         <Icon as={User}/>

@@ -7,9 +7,48 @@ import { FormControl } from "@/components/ui/form-control";
 import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
 import { EyeIcon, EyeOffIcon } from "lucide-react-native";
 import { HStack } from "@/components/ui/hstack";
+import { useMutation } from "@tanstack/react-query";
+import { login, signup } from "@/api/auth";
+import { useAuth } from "@/store/authStore";
+import { Redirect } from "expo-router";
 
 export default function Loginscreen() {
     const [showPassword, setShowPassword] = useState(false);
+    const [email , setEmail] = useState('');
+    const [password , setPassword] = useState('');
+
+    const setUser = useAuth((s) => s.setUser);
+    const setToken = useAuth((s) =>s.setToken);
+    const isLoggedIn = useAuth((s)=>!!s.token);
+
+    const loginMutation = useMutation({ 
+        mutationFn: ()=> login (email , password) , 
+        onSuccess :(data)=>{
+        console.log("success:" ,data)
+        if(data.user && data.token){
+            setUser(data.user);
+            setToken(data.token);
+        }
+    },
+    onError:()=>{
+        console.log("Hata")
+    }
+})
+
+    const signUpMutation = useMutation({ 
+        mutationFn: ()=> signup(email , password) , 
+        onSuccess :(data)=>{
+        console.log("success" , data);
+
+        if(data.user)
+            {
+                setUser(data.user);
+            }
+    },
+    onError:(error)=>{
+        console.log("Hata : " , error)
+    }
+    })
 
     const handleState = () => {
       setShowPassword((showState) => {
@@ -17,8 +56,15 @@ export default function Loginscreen() {
       });
     };
 
+    if(isLoggedIn){
+        return <Redirect href={'/'}/> 
+    }
+
+
+
     return (
       <FormControl
+      isInvalid={loginMutation.error || signUpMutation.error}
         className='p-4 border rounded-lg max-w-[560px] border-outline-300 bg-white m-2'
       >
         <VStack space='xl'>
@@ -29,8 +75,10 @@ export default function Loginscreen() {
             <Text className='text-typography-500 leading-1'>
               Email
             </Text>
-            <Input>
+            <Input >
               <InputField
+              value={email}
+              onChangeText={setEmail}
                 type="text"
               />
             </Input>
@@ -41,6 +89,8 @@ export default function Loginscreen() {
             </Text>
             <Input className='text-center'>
               <InputField
+              value={password}
+              onChangeText={setPassword}
                 type={showPassword ? 'text' : 'password'}
               />
               <InputSlot className='pr-3' onPress={handleState}>
@@ -50,13 +100,13 @@ export default function Loginscreen() {
             </Input>
           </VStack>
           <HStack space="sm">
-          <Button className='flex-1' variant="outline">
+          <Button className='flex-1' variant="outline" onPress={()=> signUpMutation.mutate()}>
             <ButtonText >
               Ailemize Katil
             </ButtonText>
           </Button>
 
-          <Button className='flex-1'>
+          <Button className='flex-1' onPress={()=> loginMutation.mutate()}>
             <ButtonText className='text-typography-0'>
               Satin Almaya Basla
             </ButtonText>

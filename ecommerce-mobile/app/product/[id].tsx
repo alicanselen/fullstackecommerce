@@ -14,18 +14,30 @@ import { Heading } from "@/components/ui/heading";
 import { Box } from "@/components/ui/box";
 // UI bileşeni olan Box'ı import ediyoruz
 import { Button , ButtonText } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProductById } from "@/api/products";
+import { ActivityIndicator } from "react-native";
 
 export default function ProductDetailsScreen(){
 
-    const {id} = useLocalSearchParams<{ id :string}>();
-    const product = products.find((p => p.id == Number(id)));
 
-    if(!product)
+    const {id} = useLocalSearchParams<{ id :string}>();
+
+    const {data:product , isLoading , error} = useQuery({
+        queryKey:['products' , id],
+        queryFn:()=>fetchProductById(Number(id)),
+    })
+
+    if(isLoading)
         {
-            return(
-                <Text>URUN DETAYLARI {id}</Text>
-            ) 
+            return <ActivityIndicator/>;
         }
+
+    if(error){
+        return <Text>Urun Bulunamadi Veya Satici Tarafindan Kaldirildi</Text>
+    }
+
+
     return(
         <Card className="p-5 rounded-lg max-w-[560px] flex-1">
             <Stack.Screen  options={{title:product.name}}/>

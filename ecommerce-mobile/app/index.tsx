@@ -22,7 +22,7 @@ export default function HomeScreen(){
         }
 
     if(error){
-        return <Text>Urunler Yuklenirken Bir Hata Olusu</Text>
+        return <Text>Urunler Yuklenirken Bir Hata Olustu</Text>
     }
 
     return (

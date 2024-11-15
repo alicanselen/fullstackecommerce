@@ -8,7 +8,7 @@ export async function listProducts()
     if(!res.ok){
         throw new Error ('Error')
     }
-    console.log(data);
+    
     return data;
 }
 export async function fetchProductById(id:number){
@@ -18,6 +18,6 @@ export async function fetchProductById(id:number){
     if(!res.ok){
         throw new Error ('Error')
     }
-    console.log(data);
+    
     return data;
 }

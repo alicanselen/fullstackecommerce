@@ -6,14 +6,32 @@ import { View,FlatList } from "react-native";
 import { Text } from "@/components/ui/text";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Redirect } from "expo-router";
+import { useMutation } from "@tanstack/react-query";
+import { createOrder } from "@/api/orders";
 export default function CartScreen(){
     const item = useCart((state) => state.items);
     const resetCart = useCart((state)=> state.resetCart);
 
+    const createOrderMutation = useMutation({
+        mutationFn:()=>createOrder(item.map((item)=>({
+            productId:item.product.id,
+            quantity:item.quantity,
+            price:item.product.price,
+        }))
+    ),
+    onSuccess: (data)=>{
+        console.log(data);
+        resetCart();
+    },
+    onError:(error)=>{
+        console.log(error);
+    }
+    })
+
     const onCheckout = async () =>{
         //siparisler servera gonderilir
 
-        resetCart();
+        createOrderMutation.mutate();
     } 
     if(item.length ===0){
         return <Redirect href={'/'}/>

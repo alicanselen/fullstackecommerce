@@ -14,7 +14,7 @@ import  Link  from "next/link";
 export default function ProductListItem({ product }) {
     return (
         // Link, kullanıcıyı ürün sayfasına yönlendirecek. Burada `href` ile yönlendirme yolu belirliyoruz.
-        <Link href={`/product/${product.id}`} className="flex flex-1 min-w-[300px]">
+        <Link href={`/dashboard/products/${product.id}`} className="flex flex-1 min-w-[300px]">
             {/* Pressable bileşeni, kullanıcı etkileşimini algılar, dokunulabilir alan yaratır */}
                 {/* Card bileşeni, ürün öğesini görsel ve bilgilerle sarmalar */}
                 <Card className="p-5 rounded-lg flex-1">

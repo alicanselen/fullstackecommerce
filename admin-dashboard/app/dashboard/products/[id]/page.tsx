@@ -8,5 +8,6 @@ export default async function ProductsPage({params :{id}}:{params:{id:string}}) 
         <div className="max-w-screen-xl mx-auto w-full">
             <ProductListItem product = {product}/>        
         </div>
-    )
+    );
 }
+

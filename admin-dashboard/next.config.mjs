@@ -1,3 +1,4 @@
+'use client'
 import { withGluestackUI } from "@gluestack/ui-next-adapter";
 /** @type {import('next').NextConfig} */
 const nextConfig = {

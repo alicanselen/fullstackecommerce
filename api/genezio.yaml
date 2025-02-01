@@ -1,0 +1,10 @@
+name: ecommerce-api
+type: backend
+language: typescript
+region: us-east-1
+
+backend:
+  path: src
+
+scripts:
+  preBackendDeploy: npm install

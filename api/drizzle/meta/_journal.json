@@ -22,6 +22,13 @@
       "when": 1731408841056,
       "tag": "0002_mighty_snowbird",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1738358672334,
+      "tag": "0003_yielding_whistler",
+      "breakpoints": true
     }
   ]
 }

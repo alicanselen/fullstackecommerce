@@ -1,8 +1,8 @@
 import { doublePrecision, integer, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-import { usersTable } from './usersSchema.js';
-import { productsTable } from './productsSchema.js';
 import { z } from "zod";
+import { usersTable } from "./usersSchema.js";
+import { productsTable } from "./productsSchema.js";
 
 export const ordersTable = pgTable('orders', {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -30,7 +30,7 @@ export const ordersTable = pgTable('orders', {
     id:true,
     userId:true,
     createdAt:true,
-    status:true
+    status:true,
 
   });
 
